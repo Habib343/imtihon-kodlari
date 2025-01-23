@@ -1,0 +1,310 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'imti.dart';
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Imtihon(),
+  ));
+}
+
+class Imtihon extends StatefulWidget {
+  const Imtihon({super.key});
+
+  @override
+  State<Imtihon> createState() => _ImtihonState();
+}
+
+class _ImtihonState extends State<Imtihon> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                height: 185,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("rasm/blue.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: AssetImage("rasm/images-.png"),
+                            radius: 25,
+                          ),
+                          Icon(
+                            CupertinoIcons.settings,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                      Text(
+                        "Good afternoon,",
+                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                      ),
+                      Text(
+                        "Jessica",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              color: Color.fromARGB(255, 6, 33, 114),
+              child: ListView(
+                padding: EdgeInsets.all(15),
+                children: [
+                  Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.blue[900],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Icon(Icons.emoji_emotions, color: Colors.yellow),
+                          SizedBox(width: 20),
+                          Text(
+                            'How are you feeling?',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Text(
+                    "Recently played",
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Imti(title: ""),
+                            ),
+                          );
+                        },
+                        child: _buildRecentlyPlayedCard(
+                            "Daily calm", "10 min", "rasm/blue.jpg"),
+                      ),
+                      SizedBox(width: 30),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Imti(title: "Stay happy"),
+                            ),
+                          );
+                        },
+                        child: _buildRecentlyPlayedCard(
+                            "Stay happy", "10 min", "rasm/blue.jpg"),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Your favorites",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Icon(
+                        CupertinoIcons.search,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _buildFavoriteCard(
+                            "Train your mind", "Meditation", "rasm/blue.jpg"),
+                        SizedBox(width: 15),
+                        _buildFavoriteCard(
+                            "Relaxing sounds", "Sleep", "rasm/blue.jpg"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 6, 33, 114),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                  top: 0,
+                  child: Container(
+                    height: 60,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.blue[900],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Icons.home, color: Colors.white),
+                          Icon(CupertinoIcons.music_note, color: Colors.white),
+                          Icon(CupertinoIcons.scope, color: Colors.white),
+                          Icon(CupertinoIcons.person, color: Colors.white),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRecentlyPlayedCard(String title, String duration, String image) {
+    return Container(
+      height: 200,
+      width: 220,
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            bottom: 0,
+            child: Container(
+              height: 70,
+              width: 220,
+              decoration: BoxDecoration(
+                color: Colors.blue[900],
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    Text(
+                      title,
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    Text(
+                      duration,
+                      style: TextStyle(color: Colors.white70, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFavoriteCard(String title, String subtitle, String image) {
+    return Container(
+      height: 80,
+      width: 390,
+      decoration: BoxDecoration(
+        color: Colors.blue[900],
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: AssetImage(image),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
